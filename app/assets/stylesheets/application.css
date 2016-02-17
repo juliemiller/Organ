@@ -13,3 +13,20 @@
  *= require_tree .
  *= require_self
  */
+.key {
+  border: 1px solid black;
+  height: 300px;
+  width: 75px;
+  display: inline-block;
+}
+.sharp {
+  background-color: black;
+  height: 250px;
+  width: 50px
+}
+.playing {
+  background-color: lightgrey;
+}
+.playing.sharp {
+  background-color: #414C4C
+}
