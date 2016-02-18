@@ -11,16 +11,16 @@ var Key = React.createClass({
   componentDidMount: function(){
     var tone = Tones[this.props.noteString];
     var note = new Note(tone);
-    this.setState({ note: note});
-    KeyStore.addListener(this.keyPlaying);
+    var listener = KeyStore.addListener(this.keyPlaying);
+    this.setState({ note: note, keyPlayingListener: listener});
   },
 
   componentWillUmount: function() {
-    KeyStore.removeListener(this.keyPlaying);
+    this.keyPlayingListener.remove();
+    this.setState({keyPlayingListener: null});
   },
 
   keyPlaying: function() {
-    console.log(KeyStore.keys());
     if (KeyStore.keys().indexOf(this.props.noteString) !== -1) {
       this.state.note.start();
       this.setState({playing: true});

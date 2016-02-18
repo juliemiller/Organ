@@ -12,6 +12,14 @@ var KeyActions = {
       actionType: "KEY_RELEASED",
       key: key
     });
+  },
+  keyDifference: function(pressedKeys, releasedKeys) {
+    pressedKeys.map(function(key){
+      KeyActions.keyPressed(key);
+    });
+    releasedKeys.map(function(key){
+      KeyActions.keyReleased(key);
+    });
   }
 };
 
