@@ -5,14 +5,14 @@ var KeyStore = require('../stores/KeyStore');
 
 var Key = React.createClass({
   getInitialState: function() {
-    return { note: null, playing: false};
+    return {playing: false};
   },
 
   componentDidMount: function(){
     var tone = Tones[this.props.noteString];
-    var note = new Note(tone);
+    this.note = new Note(tone);
     var listener = KeyStore.addListener(this.keyPlaying);
-    this.setState({ note: note, keyPlayingListener: listener});
+    this.setState({keyPlayingListener: listener});
   },
 
   componentWillUmount: function() {
@@ -22,10 +22,10 @@ var Key = React.createClass({
 
   keyPlaying: function() {
     if (KeyStore.keys().indexOf(this.props.noteString) !== -1) {
-      this.state.note.start();
+      this.note.start();
       this.setState({playing: true});
     } else {
-      this.state.note.stop();
+      this.note.stop();
       this.setState({playing: false});
     }
   },

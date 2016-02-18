@@ -8,11 +8,9 @@ KeyStore.__onDispatch = function(payload) {
   switch (payload.actionType) {
     case "KEY_PRESSED":
       addKey(payload.key);
-      KeyStore.__emitChange();
       break;
     case "KEY_RELEASED":
       removeKey(payload.key);
-      KeyStore.__emitChange();
       break;
   }
 };
@@ -24,12 +22,14 @@ KeyStore.keys = function() {
 function addKey(key) {
   if (_keys.indexOf(key) === -1) {
     _keys.push(key);
+    KeyStore.__emitChange();
   }
 }
 
 function removeKey(key) {
   var idx = _keys.indexOf(key);
   _keys.splice(idx, 1);
+  KeyStore.__emitChange();
 }
 
 window.KeyStore = KeyStore;
